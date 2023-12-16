@@ -53,7 +53,7 @@ stock UINI_Create(file[])
 	return file_create(file);
 }
 
-stock UINI_Delete(file[])			// Some People Want That
+stock UINI_Delete(file[])			
 {
 	return file_delete(file);
 }
