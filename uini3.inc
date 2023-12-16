@@ -6,9 +6,11 @@
 
 	Based On VYD Cores : NO
 
-	Special Thanks For : DracoBlue
+	Special Thanks For : DracoBlue And JaTochNietDan
 
 	Created Data : 16/12/2023 15:18
+
+	Release Date : 16/12/2023 16:20
 
 
 */
@@ -72,7 +74,7 @@ stock UINI_SetFloat(file[], key[], Float:value)
 	return UINI_SetString(file, key, val);
 }
 
-stock UINI_SetBool(file[], key, value)
+stock UINI_SetBool(file[], key[], value)
 {
 	if(value)
 	{
@@ -218,7 +220,7 @@ stock UINI_UnSet(file[], key[]) {
 	// If we have no key, it can't be set
 	// we also have no chance to unset the key, if all together is bigger then the max string
 	new key_length = strlen(key);
-	if (key_length==0 || key_length+2>UINI_MAX_STRING) return false; UINI_MAX_STRING
+	if (key_length==0 || key_length+2>UINI_MAX_STRING) return false;
 	
 	new File:fohnd, File:fwhnd;
 	new tmpres[UINI_MAX_STRING];
@@ -228,13 +230,13 @@ stock UINI_UnSet(file[], key[]) {
 	file_delete(tmpres);
 	
 	// We'll open the source file.
-	fohnd=f_open(file, io_read);
+	fohnd=f_open(file, "r");
 	if (!fohnd) return false;
 	
-	fwhnd=f_open(tmpres,io_write);
+	fwhnd=f_open(tmpres, "w");
 	if (!fwhnd) {
 		// we can't open the second file for writing, so .. let's close the open one and exit.
-		fclose(fohnd);
+		f_close(fohnd);
 		return false;
 	}
 	
